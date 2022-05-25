@@ -1,11 +1,11 @@
 /*
- * memdump_over_usb.c - S905D3 memory dump tool over USB
+ * memdump_over_usb.c - S922X memory dump tool over USB
  */
 #define P_WATCHDOG_RESET (volatile unsigned int *)0xFFD0F0DC
-#define _clear_icache() ((void (*)(void))0xffff048c)()
-#define _dwc_pcd_irq() ((void (*)(void))0xffff8250)()
-#define _start_bulk_transfer(pcd) ((void (*)(volatile pcd_struct_t *))0xffff6b58)(pcd)
-#define BOOTROM_ADDR 0xFFFF0000
+#define _clear_icache() ((void (*)(void))0xffff0534)()   //previously 0xffff048c for S905D3
+#define _dwc_pcd_irq() ((void (*)(void))0xffff6d7c)()    //previously 0xffff8250 for S905D3
+#define _start_bulk_transfer(pcd) ((void (*)(volatile pcd_struct_t *))0xffff56ec)(pcd)  //previously 0xffff6b58 for S905D3
+#define BOOTROM_ADDR 0xFFFF0000                 //bootrom 0xFFFF0000, AES key 0xFFFE7C20 (AES key for S905D3 0xFFFE0020)
 
 typedef struct pcd_struct_s
 {
@@ -46,7 +46,7 @@ void _start()
     _dwc_pcd_irq();  //clear USB state
     _dwc_pcd_irq();  //after exploitation
 
-    usb_setup_bulk_in((unsigned char *)BOOTROM_ADDR, 0x10000);
+    usb_setup_bulk_in((unsigned char *)BOOTROM_ADDR, 0x10000);  //0x10000 bytes for BootRom
     do
     {
         watchdog_reset();
