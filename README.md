@@ -15,9 +15,10 @@ This tool exploits a [vulnerability](https://fredericb.info/2021/02/amlogic-usbd
 ## Usage
 ```
 ./amlogic-usbdl <input_file> [<output_file>]
-	input_file: payload binary to load and execute (max size 65280 bytes)
+	input_file: payload binary to load and execute (max size 65282 bytes)
 	output_file: file to write data returned by payload
 ```
+Note: payload binary size can be increased to a maximum of 65530 bytes, by decreasing the bulk_transfer_count in amlogic-usbdl to 0x6. 
 
 ## Payloads
 Payloads are raw binary AArch64 executables. Some are provided in directory **payloads/**.
