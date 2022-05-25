@@ -4,13 +4,13 @@
 You will be solely responsible for any damage caused to your hardware/software/warranty/data/cat/etc...
 
 ## Description
-Amlogic bootrom supports booting from USB. This method of boot requires an USB host to send a signed bootloader to the bootrom via USB port.
+Amlogic bootrom supports booting from USB. This method of boot requires an USB host to send a signed bootloader to the bootrom via USB port.  This fork is modified to work with the S922X SOC.
 
 This tool exploits a [vulnerability](https://fredericb.info/2021/02/amlogic-usbdl-unsigned-code-loader-for-amlogic-bootrom.html) in the USB download mode to load and run unsigned code in Secure World.
 
 ## Supported targets
-* Khadas VIM3L (S905D3) (Secure boot is disabled anyway)
-* Chromecast with Google TV (S905D3G)
+* Odroid N2+ (S922X) (Secure boot is disabled anyway)
+* Amazon FireTV 2nd gen Cube (S922X)
 
 ## Usage
 ```
