@@ -1,5 +1,6 @@
 /* amlogic-usbdl - github.com/frederic/amlogic-usbdl
  * SPDX-License-Identifier: GPL-3.0-or-later
+ * Modified for use with Amlogic S922X SOC 
  */
 
 #include <stdlib.h>
@@ -21,10 +22,10 @@
 
 #define AM_REQ_WR_LARGE_MEM 0x11
 
-#define LOAD_ADDR 0xfffa0000
-#define RUN_ADDR  LOAD_ADDR
-#define TARGET_RA_PTR 0xfffe3688
-#define BULK_TRANSFER_SIZE 0x100					  //alternative : 0x200, 0x1000
+#define LOAD_ADDR 0xFFFA0000
+#define RUN_ADDR  0xFFFA1000       //0xFFFA1000 for Bl2 payload to jump 0x1000 header, set RUN_ADDR LOAD_ADDR for all other payloads
+#define TARGET_RA_PTR 0xFFFE3678   //0xFFFE3678 specific to S922X, changed from 0xFFFE3688 for S905D3
+#define BULK_TRANSFER_SIZE 0xFE    //minimum size is 0x6 with max payload 65530 bytes 
 #define MAX_PAYLOAD_SIZE 0x10000 - BULK_TRANSFER_SIZE // we need the last transfer to overwrite return address
 #define BULK_TRANSFER_COUNT ((TARGET_RA_PTR - LOAD_ADDR) / BULK_TRANSFER_SIZE)
 #define RAM_SIZE ((TARGET_RA_PTR - (LOAD_ADDR + (BULK_TRANSFER_COUNT * BULK_TRANSFER_SIZE))) / 4) + 1
