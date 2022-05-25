@@ -14,6 +14,6 @@ _dump:
     bne _dump
 	ret
 
-_uart_putc: .dword 0xffff32f0
+_uart_putc: .dword 0xffff25f4      //previously 0xffff32f0 for s905d3
 _addr: .dword 0xFFFF0000
 _watchdog_rst: .dword 0xFFD0F0DC
